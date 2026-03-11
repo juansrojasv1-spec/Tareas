@@ -1,0 +1,41 @@
+import unittest
+
+# FUNCIONES DEL PROGRAMA
+
+def sumar(a, b):
+    return a + b
+
+
+def area_rectangulo(base, altura):
+    return base * altura
+
+
+def es_par(numero):
+    return numero % 2 == 0
+
+# PRUEBAS UNITARIAS
+
+class TestFunciones(unittest.TestCase):
+
+    # prueba para la funcion sumar
+    def test_sumar(self):
+        self.assertEqual(sumar(2,3),5)
+        self.assertEqual(sumar(-1,1),0)
+        self.assertEqual(sumar(10,5),15)
+
+    # prueba para area del rectangulo
+    def test_area_rectangulo(self):
+        self.assertEqual(area_rectangulo(4,5),20)
+        self.assertEqual(area_rectangulo(3,3),9)
+        self.assertEqual(area_rectangulo(10,2),20)
+
+    # prueba para verificar si es par
+    def test_es_par(self):
+        self.assertTrue(es_par(4))
+        self.assertTrue(es_par(10))
+        self.assertFalse(es_par(7))
+
+
+# ejecutar las pruebas
+if __name__ == "__main__":
+    unittest.main()
