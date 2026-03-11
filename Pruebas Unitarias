@@ -1,41 +1,40 @@
 import unittest
+from datetime import datetime
 
-# FUNCIONES DEL PROGRAMA
-
-def sumar(a, b):
-    return a + b
-
-
-def area_rectangulo(base, altura):
-    return base * altura
+# importamos las funciones del archivo principal
+from sistema_contratos import validar_fecha, validar_email
 
 
-def es_par(numero):
-    return numero % 2 == 0
+class TestSistemaContratos(unittest.TestCase):
 
-# PRUEBAS UNITARIAS
+    # -------------------------
+    # PRUEBAS validar_fecha
+    # -------------------------
 
-class TestFunciones(unittest.TestCase):
+    def test_fecha_valida(self):
+        self.assertTrue(validar_fecha("10/03/2026"))
+        self.assertTrue(validar_fecha("01/01/2024"))
 
-    # prueba para la funcion sumar
-    def test_sumar(self):
-        self.assertEqual(sumar(2,3),5)
-        self.assertEqual(sumar(-1,1),0)
-        self.assertEqual(sumar(10,5),15)
-
-    # prueba para area del rectangulo
-    def test_area_rectangulo(self):
-        self.assertEqual(area_rectangulo(4,5),20)
-        self.assertEqual(area_rectangulo(3,3),9)
-        self.assertEqual(area_rectangulo(10,2),20)
-
-    # prueba para verificar si es par
-    def test_es_par(self):
-        self.assertTrue(es_par(4))
-        self.assertTrue(es_par(10))
-        self.assertFalse(es_par(7))
+    def test_fecha_invalida(self):
+        self.assertFalse(validar_fecha("32/01/2024"))
+        self.assertFalse(validar_fecha("2024/01/01"))
+        self.assertFalse(validar_fecha("hola"))
 
 
-# ejecutar las pruebas
+    # -------------------------
+    # PRUEBAS validar_email
+    # -------------------------
+
+    def test_email_valido(self):
+        self.assertTrue(validar_email("correo@gmail.com"))
+        self.assertTrue(validar_email("usuario@empresa.co"))
+
+    def test_email_invalido(self):
+        self.assertFalse(validar_email("correo.gmail.com"))
+        self.assertFalse(validar_email("correo@gmail"))
+        self.assertFalse(validar_email("correo"))
+
+
+# ejecutar pruebas
 if __name__ == "__main__":
     unittest.main()
